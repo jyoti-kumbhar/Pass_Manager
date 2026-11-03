@@ -33,14 +33,14 @@ PassLock operates completely on-device without any cloud dependencies or analyti
 
 ```mermaid
 flowchart TD
-    User([User]) -->|Interact| UI[App UI / React Native Components]
-    UI -->|Toggle Theme| ThemeCtx[ThemeContext]
-    ThemeCtx -->|Save Preference| Storage[(Device Local Storage: AsyncStorage)]
+    User([User]) -->|Interact| UI["App UI / React Native Components"]
+    UI -->|Toggle Theme| ThemeCtx["ThemeContext"]
+    ThemeCtx -->|Save Preference| Storage[("Device Local Storage: AsyncStorage")]
     
-    UI -->|Search & Filter| FilterEngine[Filter & Search Engine]
-    UI -->|Add / Edit / Delete| StorageService[passwordStorage Service]
-    UI -->|Generate Password| PwdGen[passwordGenerator Utility]
-    UI -->|One-Tap Copy| Clipboard[expo-clipboard API]
+    UI -->|Search & Filter| FilterEngine["Filter & Search Engine"]
+    UI -->|Add / Edit / Delete| StorageService["passwordStorage Service"]
+    UI -->|Generate Password| PwdGen["passwordGenerator Utility"]
+    UI -->|One-Tap Copy| Clipboard["expo-clipboard API"]
     
     StorageService <-->|JSON Serialization| Storage
     StorageService -->|Reactive State Update| UI
@@ -50,17 +50,17 @@ flowchart TD
 
 ```mermaid
 graph TD
-    App[App.tsx]
-    App --> ThemeProvider[ThemeProvider]
-    App --> Toast[Toast Notification]
-    App --> Header[Header: Title & Dark Mode Switcher]
-    App --> SearchBar[SearchBar: Real-time Query Filter]
-    App --> CategoryFilter[CategoryFilter: All, Work, Finance, Social...]
-    App --> FlatList[Password FlatList]
-    FlatList --> PasswordCard[PasswordCard: Reveal, Copy, Category]
-    App --> FAB[Floating Action Button (+)]
-    App --> PasswordModal[PasswordModal: Add / Edit Form]
-    PasswordModal --> GeneratorModal[GeneratorModal: Custom Password Engine]
+    App["App.tsx"]
+    App --> ThemeProvider["ThemeProvider"]
+    App --> Toast["Toast Notification"]
+    App --> Header["Header: Title & Dark Mode Switcher"]
+    App --> SearchBar["SearchBar: Real-time Query Filter"]
+    App --> CategoryFilter["CategoryFilter: All, Work, Finance, Social..."]
+    App --> FlatList["Password FlatList"]
+    FlatList --> PasswordCard["PasswordCard: Reveal, Copy, Category"]
+    App --> FAB["Floating Action Button (+)"]
+    App --> PasswordModal["PasswordModal: Add / Edit Form"]
+    PasswordModal --> GeneratorModal["GeneratorModal: Custom Password Engine"]
 ```
 
 ---
