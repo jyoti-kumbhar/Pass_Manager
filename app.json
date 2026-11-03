@@ -7,6 +7,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "splash": {
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#0F172A"
     },
@@ -14,7 +15,9 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.jyotikumbhar.passlock",
       "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0F172A"
       }
     },
