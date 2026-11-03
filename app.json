@@ -23,6 +23,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5ad645e3-d2e6-4479-a669-5120e760b610"
+      }
+    },
+    "owner": "kumbharjyoti"
   }
 }
