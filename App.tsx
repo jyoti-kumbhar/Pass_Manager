@@ -17,19 +17,15 @@ import { passwordStorage } from './src/storage/passwordStorage';
 import { PasswordItem, Category } from './src/types';
 import { Header } from './src/components/Header';
 import { SearchBar } from './src/components/SearchBar';
-import { CategoryFilter } from './src/components/CategoryFilter';
 import { PasswordCard } from './src/components/PasswordCard';
 import { PasswordModal } from './src/components/PasswordModal';
 import { Toast } from './src/components/Toast';
-
-const CATEGORIES: Category[] = ['All', 'General', 'Work', 'Personal', 'Finance', 'Social'];
 
 function MainApp() {
   const { colors, isDark } = useAppTheme();
   const [passwords, setPasswords] = useState<PasswordItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<Category>('All');
   const [modalVisible, setModalVisible] = useState(false);
   const [editingItem, setEditingItem] = useState<PasswordItem | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -46,18 +42,18 @@ function MainApp() {
     loadData();
   }, [loadData]);
 
-  // Filter passwords based on search query and category
+  // Filter passwords based on search query
   const filteredPasswords = useMemo(() => {
+    if (!searchQuery.trim()) return passwords;
+    const query = searchQuery.toLowerCase();
     return passwords.filter((item) => {
-      const matchesCategory =
-        selectedCategory === 'All' || item.category === selectedCategory;
-      const matchesSearch =
-        item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (item.website && item.website.toLowerCase().includes(searchQuery.toLowerCase()));
-      return matchesCategory && matchesSearch;
+      return (
+        item.title.toLowerCase().includes(query) ||
+        item.username.toLowerCase().includes(query) ||
+        (item.website && item.website.toLowerCase().includes(query))
+      );
     });
-  }, [passwords, searchQuery, selectedCategory]);
+  }, [passwords, searchQuery]);
 
   const handleOpenAdd = () => {
     setEditingItem(null);
@@ -116,13 +112,6 @@ function MainApp() {
         onClear={() => setSearchQuery('')}
       />
 
-      {/* Category Pills */}
-      <CategoryFilter
-        categories={CATEGORIES}
-        selectedCategory={selectedCategory}
-        onSelectCategory={setSelectedCategory}
-      />
-
       {/* Main Content / Password List */}
       {loading ? (
         <View style={styles.centerContainer}>
@@ -155,7 +144,7 @@ function MainApp() {
               </Text>
               <Text style={[styles.emptySubtitle, { color: colors.textSecondary }]}>
                 {searchQuery
-                  ? 'Try a different search keyword or category filter'
+                  ? 'Try a different search keyword'
                   : 'Tap the + button below to securely store your first password locally.'}
               </Text>
             </View>

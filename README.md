@@ -5,7 +5,7 @@ A minimalist, high-performance, and privacy-focused password manager built with 
 - **No Remote Database**: 100% offline and local-first data storage.
 - **No Login / Account Required**: Instant frictionless access directly to your passwords.
 - **Dark & Light Mode**: Seamless theme switching with manual toggle and system appearance detection.
-- **Simple, Modern UI**: Designed with clean typography, card layouts, category filters, and intuitive controls.
+- **Simple, Modern UI**: Designed with clean typography, card layouts, and intuitive controls.
 - **Built-in Password Generator**: Customizable length, character pools, and real-time password strength indicator.
 - **One-Tap Copy & Feedback**: Instant clipboard copying with smooth visual feedback toasts.
 
@@ -32,7 +32,7 @@ flowchart TD
     UI -->|Toggle Theme| ThemeCtx["ThemeContext"]
     ThemeCtx -->|Save Preference| Storage[("Device Local Storage: AsyncStorage")]
     
-    UI -->|Search & Filter| FilterEngine["Filter & Search Engine"]
+    UI -->|Search| SearchEngine["Search Engine"]
     UI -->|Add / Edit / Delete| StorageService["passwordStorage Service"]
     UI -->|Generate Password| PwdGen["passwordGenerator Utility"]
     UI -->|One-Tap Copy| Clipboard["expo-clipboard API"]
@@ -50,7 +50,6 @@ graph TD
     App --> Toast["Toast Notification"]
     App --> Header["Header: Title & Dark Mode Switcher"]
     App --> SearchBar["SearchBar: Real-time Query Filter"]
-    App --> CategoryFilter["CategoryFilter: All, Work, Finance, Social..."]
     App --> FlatList["Password FlatList"]
     FlatList --> PasswordCard["PasswordCard: Reveal, Copy, Category"]
     App --> FAB["Floating Action Button (+)"]
@@ -71,7 +70,7 @@ graph TD
 | **1-Click Copy** | One-tap button copies password directly into the system clipboard with an animated checkmark and floating confirmation toast. |
 | **Custom Generator** | Create strong random passwords with custom lengths (8–32) and character sets (A-Z, a-z, 0-9, symbols). |
 | **Strength Analyzer** | Evaluates password complexity in real-time (Weak, Fair, Good, Strong) with color-coded meters. |
-| **Categorization & Search** | Instant filter by category tags (Work, Personal, Finance, Social, General) or full-text query. |
+| **Categorization & Search** | Instant full-text search across titles, usernames, and URLs, with color-coded category tags. |
 
 ---
 
@@ -97,7 +96,6 @@ passwordManager/
     └── components/
         ├── Header.tsx               # App bar with counter & theme toggle button
         ├── SearchBar.tsx            # Clean search input with quick clear
-        ├── CategoryFilter.tsx       # Horizontal scrolling category filter pills
         ├── PasswordCard.tsx         # Password list card with show/hide and copy
         ├── PasswordModal.tsx        # Add/Edit bottom sheet modal
         ├── GeneratorModal.tsx       # Interactive password generator dialog
